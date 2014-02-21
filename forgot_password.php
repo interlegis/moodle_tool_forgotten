@@ -91,7 +91,7 @@ if ($p_secret !== false) {
         $user->secret = '';
         $DB->set_field('user', 'secret', $user->secret, array('id'=>$user->id));
 
-        $changepasswordurl = "{$CFG->httpswwwroot}/login/change_password.php";
+        $changepasswordurl = "{$CFG->httpswwwroot}/admin/tool/forgotten/change_password.php";
         $a = new stdClass();
         $a->email = $user->email;
         $a->link = $changepasswordurl;
