@@ -29,6 +29,7 @@
 require('../../../config.php');
 require_once($CFG->libdir.'/authlib.php');
 require_once('forgot_password_form.php');
+require_once('locallib.php');
 
 $p_secret   = optional_param('p', false, PARAM_RAW);
 $p_username = optional_param('s', false, PARAM_RAW);
@@ -41,8 +42,8 @@ $systemcontext = context_system::instance();
 $PAGE->set_context($systemcontext);
 
 // setup text strings
-$strforgotten = get_string('passwordforgotten', 'tool_forgotten');
-$strlogin     = get_string('login', 'tool_forgotten');
+$strforgotten = get_string('passwordforgotten');
+$strlogin     = get_string('login');
 
 $PAGE->navbar->add($strlogin, get_login_url());
 $PAGE->navbar->add($strforgotten);
@@ -51,7 +52,7 @@ $PAGE->set_heading($COURSE->fullname);
 
 // if you are logged in then you shouldn't be here!
 if (isloggedin() and !isguestuser()) {
-    redirect($CFG->wwwroot.'/index.php', get_string('loginalready', 'tool_forgotten'), 5);
+    redirect($CFG->wwwroot.'/index.php', get_string('loginalready'), 5);
 }
 
 if ($p_secret !== false) {
@@ -91,13 +92,13 @@ if ($p_secret !== false) {
         $user->secret = '';
         $DB->set_field('user', 'secret', $user->secret, array('id'=>$user->id));
 
-        $changepasswordurl = "{$CFG->httpswwwroot}/admin/tool/forgotten/change_password.php";
+        $changepasswordurl = "{$CFG->httpswwwroot}/login/change_password.php";
         $a = new stdClass();
         $a->email = $user->email;
         $a->link = $changepasswordurl;
 
         echo $OUTPUT->header();
-        notice(get_string('emailpasswordsent', 'tool_forgotten', $a), $changepasswordurl);
+        notice(get_string('emailpasswordsent', '', $a), $changepasswordurl);
 
     } else {
         if (!empty($user) and strlen($p_secret) === 15) {
@@ -156,12 +157,12 @@ if ($mform->is_cancelled()) {
             $user->secret = random_string(15);
             $DB->set_field('user', 'secret', $user->secret, array('id'=>$user->id));
 
-            if (!send_password_change_confirmation_email($user)) {
+            if (!forgotten_send_password_change_confirmation_email($user)) {
                 print_error('cannotmailconfirm');
             }
 
         } else {
-            if (!send_password_change_info($user)) {
+            if (!forgotten_send_password_change_info($user)) {
                 print_error('cannotmailconfirm');
             }
         }
@@ -176,7 +177,7 @@ if ($mform->is_cancelled()) {
     } else {
         // Confirm email sent
         $protectedemail = preg_replace('/([^@]*)@(.*)/', '******@$2', $user->email); // obfuscate the email address to protect privacy
-        $stremailpasswordconfirmsent = get_string('emailpasswordconfirmsent', 'tool_forgotten', $protectedemail);
+        $stremailpasswordconfirmsent = get_string('emailpasswordconfirmsent', '', $protectedemail);
         notice($stremailpasswordconfirmsent, $CFG->wwwroot.'/index.php');
     }
 

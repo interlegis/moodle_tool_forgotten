@@ -28,25 +28,10 @@ $string['searchbycpf'] = 'Search by CPF';
 $string['cpf'] = 'CPF';
 $string['cpffieldnotfound'] = 'This site has not a CPF field defined.';
 $string['usercpfnotfound'] = 'No user with this CPF was found.';
-$string['searchbyusername'] = 'Search by username';
-$string['username'] = 'Username';
-$string['search'] = 'Search';
-$string['searchbyemail'] = 'Search by email address';
-$string['email'] = 'Email address';
-$string['invalidemail'] = 'Invalid email address';
-$string['forgottenduplicate'] = 'The email address is shared by several accounts, please enter username instead';
-$string['confirmednot'] = 'Your registration has not yet been confirmed!';
-$string['emailnotfound'] = 'The email address was not found in the database';
-$string['usernamenotfound'] = 'The username was not found in the database';
+$string['forgottenduplicate'] = 'The CPF number is shared by several accounts, please enter username or email instead';
 $string['usernameoremail'] = 'Enter either username or email address or CPF';
-$string['passwordforgotten'] = 'Forgotten password';
-$string['login'] = 'Login';
-$string['loginalready'] = 'You are already logged in';
-$string['emailpasswordsent'] = 'Thank you for confirming the change of password.
-An email containing your new password has been sent to your address at<br /><b>{$a->email}</b>.<br />
-The new password was automatically generated - you might like to
-<a href="{$a->link}">change your password</a> to something easier to remember.';
-$string['emailpasswordconfirmmaybesent'] = '<p>If you supplied a correct username or email address then an email should have been sent to you.</p>
+$string['emailpasswordconfirmmaybesent'] = '<p>If you supplied a correct username email address or CPF then an email should have been sent to you.</p>
    <p>It contains easy instructions to confirm and complete this password change.
 If you continue to have difficulty, please contact the site administrator.</p>';
-$string['passwordforgotteninstructions2'] = 'To reset your password, submit your username or your email address below. If we can find you in the database, an email will be sent to your email address, with instructions how to get access again.';
+$string['passwordforgotteninstructions2'] = 'To reset your password, submit your username, your email address or your CPF below. If we can find you in the database, an email will be sent to your email address, with instructions how to get access again.';
+

@@ -35,20 +35,20 @@ class login_forgot_password_form extends moodleform {
         $mform    = $this->_form;
         $mform->setDisableShortforms(true);
 
-        $mform->addElement('header', 'searchbyusername', get_string('searchbyusername', 'tool_forgotten'), '');
+        $mform->addElement('header', 'searchbyusername', get_string('searchbyusername'), '');
 
-        $mform->addElement('text', 'username', get_string('username', 'tool_forgotten'));
+        $mform->addElement('text', 'username', get_string('username'));
         $mform->setType('username', PARAM_RAW);
 
-        $submitlabel = get_string('search', 'tool_forgotten');
+        $submitlabel = get_string('search');
         $mform->addElement('submit', 'submitbuttonusername', $submitlabel);
 
-        $mform->addElement('header', 'searchbyemail', get_string('searchbyemail', 'tool_forgotten'), '');
+        $mform->addElement('header', 'searchbyemail', get_string('searchbyemail'), '');
 
-        $mform->addElement('text', 'email', get_string('email', 'tool_forgotten'));
+        $mform->addElement('text', 'email', get_string('email'));
         $mform->setType('email', PARAM_RAW);
 
-        $submitlabel = get_string('search', 'tool_forgotten');
+        $submitlabel = get_string('search');
         $mform->addElement('submit', 'submitbuttonemail', $submitlabel);
 
         $mform->addElement('header', 'searchbycpf', get_string('searchbycpf', 'tool_forgotten'), '');
@@ -71,27 +71,27 @@ class login_forgot_password_form extends moodleform {
         {
             if (!empty($data['email'])) {
                 if (!validate_email($data['email'])) {
-                    $errors['email'] = get_string('invalidemail', 'tool_forgotten');
+                    $errors['email'] = get_string('invalidemail');
                 } else if ($DB->count_records('user', array('email'=>$data['email'])) > 1) {
-                    $errors['email'] = get_string('forgottenduplicate', 'tool_forgotten');
+                    $errors['email'] = get_string('forgottenduplicate');
                 } else {
                     if ($user = get_complete_user_data('email', $data['email'])) {
                         if (empty($user->confirmed)) {
-                            $errors['email'] = get_string('confirmednot', 'tool_forgotten');
+                            $errors['email'] = get_string('confirmednot');
                         }
                     }
                     if (!$user and empty($CFG->protectusernames)) {
-                        $errors['email'] = get_string('emailnotfound', 'tool_forgotten');
+                        $errors['email'] = get_string('emailnotfound');
                     }
                 }
             } else if (!empty($data['username'])) {
                 if ($user = get_complete_user_data('username', $data['username'])) {
                     if (empty($user->confirmed)) {
-                        $errors['email'] = get_string('confirmednot', 'tool_forgotten');
+                        $errors['email'] = get_string('confirmednot');
                     }
                 }
                 if (!$user and empty($CFG->protectusernames)) {
-                    $errors['username'] = get_string('usernamenotfound', 'tool_forgotten');
+                    $errors['username'] = get_string('usernamenotfound');
                 }
             } else {
                 if (!$campo = $DB->get_record('user_info_field', array('shortname'=>'cpf'))) {
@@ -109,7 +109,7 @@ class login_forgot_password_form extends moodleform {
                         } else {
                             foreach ($users as $user) {
                                 if (empty($user->confirmed)) {
-                                    $errors['cpf'] = get_string('confirmednot', 'tool_forgotten');
+                                    $errors['cpf'] = get_string('confirmednot');
                                 }
                             } 
                         }
