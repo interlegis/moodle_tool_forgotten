@@ -124,8 +124,6 @@ if ($mform->is_cancelled()) {
     if (!empty($data->username)) {
         $username = textlib::strtolower($data->username); // mimic the login page process, if they forget username they need to use email for reset
         $user = $DB->get_record('user', array('username'=>$username, 'mnethostid'=>$CFG->mnet_localhost_id, 'deleted'=>0, 'suspended'=>0));
-        var_dump($user);
-
     } else if (!empty($data->email)) {
         // this is tricky because
         // 1/ the email is not guaranteed to be unique - TODO: send email with all usernames to select the correct account for pw reset
